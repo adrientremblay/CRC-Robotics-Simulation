@@ -1,0 +1,8 @@
+Material My Material : Common/MatDefs/Light/Lighting.j3md {
+     MaterialParameters {
+	DiffuseMap : "Interface/start-background.png"
+        AlphaMap : "Textures/Terrain/splat/alphamap2.png"
+     }
+    AdditionalRenderState {
+    }
+}

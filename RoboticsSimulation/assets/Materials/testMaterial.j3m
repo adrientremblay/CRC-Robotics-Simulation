@@ -1,0 +1,9 @@
+Material My Material : Common/MatDefs/Light/Lighting.j3md {
+     MaterialParameters {
+        DiffuseMap : "Textures/Terrain/Rock/Rock.PNG"
+        NormalMap : "Textures/Terrain/Rock/Rock_normal.png"
+        UseMaterialColors : false
+     }
+    AdditionalRenderState {
+    }
+}

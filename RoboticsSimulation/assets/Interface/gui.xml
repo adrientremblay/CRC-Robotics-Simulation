@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.lessvoid.com/nifty-gui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    
+    <!--Start Screen-->
+    <screen id = "start" controller="guiControllers.StartScreen">
+        <layer id="foreground" childLayout="horizontal">
+            <!--Readme panel-->
+<!--             <panel id="readme-panel" height="50%" width="30%" align="left" childLayout="center">
+                <text color="#F00" text="
+                Pick the special powerups for each team
+                choose which one activates the drag race actuator
+                Drag and Click to move the camera
+"
+                  font="Interface/Fonts/Default.fnt" width="100%" height="100%" wrap="true"/>
+            </panel>-->
+            
+            <!--Thingy-->
+             <panel id="panel_top_right" height="75%" width="25%" align="right" childLayout="horizontal">
+                <panel width = "50%" childLayout = "vertical"> <!-- Yellow -->
+                    <control name="button" label="YELLOW start" id="yStart" align="center"
+                          valign="center" visibleToMouse="true" >
+                        <interact onClick="yellowStart()"/>
+                        <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                    </control>
+                    
+                    <control displayItems = "4" id="yellowDropdown" name="dropDown" />
+                </panel>
+                 
+                <panel width = "50%" childLayout = "vertical"> <!-- Blue -->
+                    <control name="button" label="BLUE start" id="bStart" align="center"
+                          valign="center" visibleToMouse="true" >
+                        <interact onClick="blueStart()"/>
+                        <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                    </control>
+                    
+                    <control displayItems = "4" id="blueDropdown" name="dropDown" />
+                </panel>
+             
+             </panel>
+             
+
+        </layer>
+    </screen>
+    
+    <!--Game Screen-->
+    <screen id="hud" controller="guiControllers.ConveyorScreen" >  
+        
+        <layer id="foreground" childLayout="horizontal">
+            <!-- Top Left Panel -->
+            <panel padding = "10px, 10px, 10px, 10px" id="panel_top_left" height="50%" width="70%" childLayout="vertical" >
+                <panel id="inner_pannel" height="50%" width="25%" childLayout="vertical">
+                    <!--Game Time-->
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Time Left In Game: " /><control id="gameTimeLabel" name="label" text="0       " />
+                    </panel>
+                    <!-- Conveyor Direction label -->
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Conveyor Direction: " /><control width = "100%" id="directionLabel" name="label" text="PAUSED" />
+                    </panel>
+                    <!-- Direction Change Countdown Label -->
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Direction Change in: " /><control id = "countdown" name="label" text=" seconds" /><control name="label" text=" seconds" />
+                    </panel>
+                     
+                    
+                    <panel childLayout="horizontal" width="25%">
+                        <control name="label" text="Traversal Time: " /><control id = "ttimeLabel" name="label" text="?   " /><control name="label" text=" Seconds" />
+                    </panel>
+                    
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Speed: " /><control id = "speedLabel" name="label" text="?       " /><control name="label" text=" Meters/Second" />
+                    </panel>
+                    <!-- Conveyor Multiplier -->
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Speed Multiplier: " /><control width = "100%" id="multiplierLabel" name="label" text="1.0" />
+                    </panel>
+                    <!-- Ball Drop Countdown Label -->
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Ball Drop in: " /><control width = "100%" id="dropCountdown" name="label" text="1.0" />
+                    </panel>
+                    <!-- Drop Time Multiplier Label -->
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Drop Rate Multiplier: " /><control width = "100%" id="dropMultiplierLabel" name="label" text="1.0" />
+                    </panel>
+                </panel>
+                
+                <!--Console Panel-->
+                <panel id="panel_bottom_right" height="20%" width="30%" childLayout="vertical" >
+
+                      <control id="console" name="nifty-console" lines="10" />
+
+                </panel>
+            </panel>
+            
+            <panel id="right_panel" height="100%" width="30%" align = "right" childLayout="vertical">
+                <!--Main Panel-->
+                <panel style="nifty-panel" id="panel_top_right" height="220px" width="100%" childLayout="horizontal">
+                     <!--Yellow Team Panel--> 
+                    <panel childLayout="vertical">
+                        <!-- Team A Score Label -->
+                        <control name="label" text="Yellow Team Score" />
+                        <control width = "100%" id="teamALabel" name="label" text="0" />
+                        
+                        <panel childLayout="horizontal">
+                            <control width = "140px" name="button" label="2x Conveyor Speed" id="powerSpeedYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolYellow" text="0  " />
+                        </panel>
+                        <panel childLayout="horizontal">
+                            <control width = "140px" name="button" label="1.5x Conveyor Speed" id="powerSpeedYellow2" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolYellow2" text="0  " />
+                        </panel>
+                        <panel childLayout="horizontal">
+                            <control width = "140px" name="button" label="2x Drop Rate" id="powerDropYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerDropCoolYellow" text="0  " />
+                        </panel>
+                        
+                        <panel  width = "100%" childLayout = "absolute">
+                            <panel x = "0px" y = "0px" id = "Yellow1panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="0.5x Conveyor Speed" id="powerSpecial1Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px"  name="label" id = "powerSpecial1CoolYellow" text="0  " />
+                            </panel>
+                            <panel x = "0px" y = "0px" id = "Yellow2panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="3.0x Drop Rate" id="powerSpecial2Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial2CoolYellow" text="0  " />
+                            </panel>
+                            <panel x = "0px" y = "0px" id = "Yellow3panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="Drop Black GP" id="powerSpecial3Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial3CoolYellow" text="0  " />
+                            </panel>
+                            <panel x = "0px" y = "0px" id = "Yellow4panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="Wipe Conveyor" id="powerSpecial4Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial4CoolYellow" text="0  " />
+                            </panel>
+                        </panel>
+                        
+
+                        <panel childLayout="horizontal">
+                            <control width = "180%" name="button" label="Stop Conveyor" id="powerStop" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerStopCool" text="0  " />
+                        </panel>
+                        
+                        <panel id = "bonusYellowPanel" childLayout="horizontal">
+                            <control width = "140px" name="button" label="Flip Conveyor" id="powerBonusYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "bonusCoolYellow" text="0  " />
+                        </panel>
+
+                       
+                    </panel>
+                    
+                    <!-- Blue Team Panel -->
+                    <panel childLayout="vertical">
+                        <!-- Team B Score Label -->
+                        <control name="label" text="Blue Team Score" />
+                        <control width = "100%" id="teamBLabel" name="label" text="0" />
+                        
+                        <panel childLayout="horizontal">
+                            <control width = "140px" name="button" label="2x Conveyor Speed" id="powerSpeedBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolBlue" text="0  " />
+                        </panel>
+                        <panel childLayout="horizontal">
+                            <control width = "140px" name="button" label="1.5x Conveyor Speed" id="powerSpeedBlue2" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolBlue2" text="0  " />
+                        </panel>
+                        <panel childLayout="horizontal">
+                            <control width = "140px" name="button" label="2x Drop Rate" id="powerDropBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerDropCoolBlue" text="0  " />
+                        </panel>
+                        
+                        <panel width = "100%" childLayout = "absolute">
+                            <panel x = "0px" y = "0px" id = "Blue1panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="0.5x Conveyor Speed" id="powerSpecial1Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial1CoolBlue" text="0  " />
+                            </panel>
+                            <panel x = "0px" y = "0px" id = "Blue2panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="3.0x Drop Rate" id="powerSpecial2Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial2CoolBlue" text="0  " />
+                            </panel>
+                            <panel x = "0px" y = "0px" id = "Blue3panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="Drop Black GP" id="powerSpecial3Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial3CoolBlue" text="0  " />
+                            </panel>
+                            <panel x = "0px" y = "0px" id = "Blue4panel" childLayout="horizontal">
+                                <control width = "140px" name="button" label="Wipe Conveyor" id="powerSpecial4Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial4CoolBlue" text="0  " />
+                            </panel>
+                        </panel>
+                        
+                        <panel id = "bonusBluePanel" childLayout="horizontal">
+                            <control width = "140px" name="button" label="Flip Conveyor" id="powerBonusBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "bonusCoolBlue" text="0  " />
+                        </panel>
+                    </panel>
+                   
+<!--                    Close App button
+                    <control name="button" label="Close App" id="quitButton" align="center" valign="center" >
+                        <interact onClick="exitApp()"/>
+                    </control>-->
+                        
+                </panel>
+                
+ 
+                   
+                <!--Admin Panel--> 
+                <panel id = "admin-panel" style="nifty-panel" height="40%" width="100%" childLayout="vertical">
+                    <control name="label" text="ADMIN PANEL" />
+                    
+                    <!--Modify Power-->
+                    <panel childLayout = "horizontal">
+                        <panel childLayout="vertical">
+                            <control name="label" text="Modify Duration" />
+                            <control displayItems = "8" id="durationDropdown" name="dropDown" />
+                            <control name="textfield" id="durationField" maxLength="10" text="20" />
+                            <control width = "100%" name="button" label="Change Duration" id="durationButton" >
+                              <interact onClick="changeDuration()"/>
+                            </control>
+                        </panel>
+
+                        <panel childLayout="Vertical">
+                            <control name="label" text="Modify Cooldown" />
+                            <control displayItems = "8" id="cooldownDropdown" name="dropDown" />
+                            <control name="textfield" id="cooldownField" maxLength="10" text="30" />
+                            <control width = "100%" name="button" label="Change Cooldown" id="cooldownButton" >
+                              <interact onClick="changeCooldown()"/>
+                            </control>
+                        </panel>
+                    </panel>
+                    
+                    <!--Drop Ball Buttion-->
+                    <control name="button" label="Drop Ball" id="dropBALL" align="center"
+                          valign="center" visibleToMouse="true" >
+                        <interact onClick="dropABall()"/>
+                    </control>
+
+                     <!--Drop Balls Checkbox-->
+                    <control name="label" text="Drop Balls?" />
+                    <control align="center" checked="true" id="ballDropCheck" name="checkbox" />
+
+                     <!--Traverse Time Slider-->
+                    <control name="label" text="Traversal Time (s)" />
+                    <control min="1" max="45" initial="45" id="ttimeSlider" name="horizontalSlider" width="100%" />
+
+                     <!--Drop Delay Field--> 
+                    <control name="label" text="Drop ball every" />
+                    <control name="textfield" id="dropDelayField" maxLength="10" text="5" />
+                    <control name="label" text="seconds" />
+                    <control name="button" label="Go">
+                        <interact onClick="dropDelayChange()"/>
+                    </control>
+                    
+                    <!--Reset Game Button--> 
+                    <control name="button" label="Reset Game">
+                        <interact onClick="resetButton()"/>
+                    </control>
+                    
+                </panel>
+               
+            </panel>
+            
+        </layer>
+    </screen>
+    
+    <!--End Screen-->
+    <screen id="end" controller="guiControllers.EndScreen">
+        <layer id="foreground" childLayout="vertical">
+            <!--Readme panel-->
+            <panel id="end-panel" height="100%" width="100%" childLayout="vertical" padding = "10px, 10px, 10px, 10px">
+                <text id = "epsteindidntkillhimself" color="#F00" width="200px" height="10%" font="Interface/Fonts/Default.fnt" text="Game Ended!"/>
+                <text id = "endmsg" color="#F00" text="Game Ended!"
+                  font="Interface/Fonts/Default.fnt" width="200px" height="90%" wrap="true"/>
+                <control padding = "0px, 10px, 0px, 10px" width = "200px" name="button" label="Restart Game">
+                    <interact onClick="resetButton2()"/>
+                </control>
+            </panel>
+             
+
+        </layer>
+    </screen>
+    
+    
+</nifty>
