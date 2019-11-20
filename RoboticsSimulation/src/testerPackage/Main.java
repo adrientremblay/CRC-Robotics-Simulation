@@ -55,6 +55,7 @@ public class Main extends SimpleApplication {
     private final static int BASE_DIR_CHANGE_TIME = 30; // DC THIS!!
     public static int BASE_DROP_TIME = 5;
     private final static Vector3f CAMERA_POS_INITIAL = new Vector3f(6f, 6f, 6f);
+    private final static Vector3f LOOK_POS_INITIAL = new Vector3f(3f, 3.5f, 2f);
     private final static Vector3f BALL_DROP_POS =  new Vector3f(0, 5.0f, 0);
     public final static int BASE_POWERUP_COOLDOWN = 30; //seconds
     public final static int BASE_GAME_TIME = 300; //seconds
@@ -125,7 +126,7 @@ public class Main extends SimpleApplication {
         
         //Configering Camera
         cam.setLocation(CAMERA_POS_INITIAL);
-        cam.lookAt(new Vector3f(3f, 3f, 3f), Vector3f.UNIT_Y);
+        cam.lookAt(LOOK_POS_INITIAL, Vector3f.UNIT_Y);
         flyCam.setDragToRotate(true); // activate windowed input behaviour
         
         //Adding lightsource
@@ -144,6 +145,7 @@ public class Main extends SimpleApplication {
      * Method to create Nifty GUI.
      */
     public void initNifty(){
+        
         NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
                 assetManager,
                 inputManager,
@@ -152,6 +154,8 @@ public class Main extends SimpleApplication {
         nifty = niftyDisplay.getNifty();
         nifty.fromXml("Interface/gui.xml", "start", new ConveyorScreen());
         guiViewPort.addProcessor(niftyDisplay);
+        
+//        System.out.println(assetManager.loadFont("Interface/Fonts/Chiller.fnt").getPreferredSize());
     }
     
     /**

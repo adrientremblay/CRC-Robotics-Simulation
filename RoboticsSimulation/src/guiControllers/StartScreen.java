@@ -61,6 +61,9 @@ public class StartScreen extends BaseAppState implements de.lessvoid.nifty.scree
         dropDownY = screen.findNiftyControl("yellowDropdown",DropDown.class);
         dropDownB.addAllItems(items);
         dropDownY.addAllItems(items);
+        
+//        BitmapText t;
+//        this.screen.findElementById("titletext").getClass());
     }
 
     @Override

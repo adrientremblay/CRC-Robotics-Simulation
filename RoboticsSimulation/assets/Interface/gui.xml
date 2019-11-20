@@ -3,45 +3,76 @@
     <useStyles filename="nifty-default-styles.xml"/>
     <useControls filename="nifty-default-controls.xml"/>
     
-    <!--Start Screen-->
+    <!--Start Screen-->=
     <screen id = "start" controller="guiControllers.StartScreen">
-        <layer id="foreground" childLayout="horizontal">
-            <!--Readme panel-->
-<!--             <panel id="readme-panel" height="50%" width="30%" align="left" childLayout="center">
-                <text color="#F00" text="
-                Pick the special powerups for each team
-                choose which one activates the drag race actuator
-                Drag and Click to move the camera
-"
-                  font="Interface/Fonts/Default.fnt" width="100%" height="100%" wrap="true"/>
+        <layer id="foreground" childLayout="vertical">
+            <panel id="panel_top" height="25%" width="65%" align="center" childLayout="center">
+                <text id = "titletext" text="CRC Robotics Simulation 2019" font="Interface/Fonts/Chiller.fnt" width="100%" height="100%"/>
+            </panel>
+<!--            <panel id="panel_mid" height="20%" width="65%" align="center" childLayout="center" >}{
+                <text text="Select special powers for each team and click the start button to have that team set off the drag button&#10;Drag on the screen to change the viewing angle&#10;Use W,S,A,D to move around"
+                      font="Interface/Fonts/Default.fnt" width="100%" height="100%"/>
             </panel>-->
-            
-            <!--Thingy-->
-             <panel id="panel_top_right" height="75%" width="25%" align="right" childLayout="horizontal">
-                <panel width = "50%" childLayout = "vertical"> <!-- Yellow -->
-                    <control name="button" label="YELLOW start" id="yStart" align="center"
-                          valign="center" visibleToMouse="true" >
-                        <interact onClick="yellowStart()"/>
-                        <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
-                    </control>
-                    
-                    <control displayItems = "4" id="yellowDropdown" name="dropDown" />
-                </panel>
-                 
-                <panel width = "50%" childLayout = "vertical"> <!-- Blue -->
-                    <control name="button" label="BLUE start" id="bStart" align="center"
-                          valign="center" visibleToMouse="true" >
-                        <interact onClick="blueStart()"/>
-                        <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
-                    </control>
-                    
-                    <control displayItems = "4" id="blueDropdown" name="dropDown" />
-                </panel>
-             
-             </panel>
-             
+            <panel id="panel_bottom" width="30%" align="center" childLayout="horizontal">
+                <!--Drag Menu-->
+                <panel id="panel_top_right" childLayout="horizontal">
+                   <panel width = "50%" childLayout = "vertical"> 
+                       <control name="button" label="YELLOW start" id="yStart" align="center"
+                             valign="center" visibleToMouse="true" >
+                           <interact onClick="yellowStart()"/>
+                           <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                       </control>
 
+                       <control displayItems = "4" id="yellowDropdown" name="dropDown" />
+                   </panel>
+
+                   <panel width = "50%" childLayout = "vertical"> 
+                       <control name="button" label="BLUE start" id="bStart" align="center"
+                             valign="center" visibleToMouse="true" >
+                           <interact onClick="blueStart()"/>
+                           <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                       </control>
+
+                       <control displayItems = "4" id="blueDropdown" name="dropDown" />
+                   </panel>
+                </panel>
+            </panel>
         </layer>
+        
+<!--        
+        <layer id="foreground" childLayout="vertical">
+            <panel childLayout = "vertical" >
+                Readme panel
+                 <panel id="readme-panel" childLayout="vertical" backgroundColor="#ff0f" height = "*" width = "50%" align = "center">
+                    <text color="#F00" text=" Pick the special powerups for each team choose which one activates the drag race actuator Drag and Click to move the camera"
+                    font="Interface/Fonts/Default.fnt" width="100%" height="100%" wrap="true"/>-->
+
+<!--                    Drag Menu
+                    <panel id="panel_top_right" childLayout="horizontal">
+                       <panel width = "50%" childLayout = "vertical">  Yellow 
+                           <control name="button" label="YELLOW start" id="yStart" align="center"
+                                 valign="center" visibleToMouse="true" >
+                               <interact onClick="yellowStart()"/>
+                               <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                           </control>
+
+                           <control displayItems = "4" id="yellowDropdown" name="dropDown" />
+                       </panel>
+
+                       <panel width = "50%" childLayout = "vertical">  Blue 
+                           <control name="button" label="BLUE start" id="bStart" align="center"
+                                 valign="center" visibleToMouse="true" >
+                               <interact onClick="blueStart()"/>
+                               <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                           </control>
+
+                           <control displayItems = "4" id="blueDropdown" name="dropDown" />
+                       </panel>-->
+
+<!--                     </panel>
+                </panel>
+            </panel>
+        </layer>-->
     </screen>
     
     <!--Game Screen-->
@@ -104,37 +135,37 @@
                         <control width = "100%" id="teamALabel" name="label" text="0" />
                         
                         <panel childLayout="horizontal">
-                            <control width = "140px" name="button" label="2x Conveyor Speed" id="powerSpeedYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolYellow" text="0  " />
+                            <control width = "150px" name="button" label="2x Conveyor Speed" id="powerSpeedYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolYellow" text="0  " />
                         </panel>
                         <panel childLayout="horizontal">
-                            <control width = "140px" name="button" label="1.5x Conveyor Speed" id="powerSpeedYellow2" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolYellow2" text="0  " />
+                            <control width = "150px" name="button" label="1.5x Conveyor Speed" id="powerSpeedYellow2" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolYellow2" text="0  " />
                         </panel>
                         <panel childLayout="horizontal">
-                            <control width = "140px" name="button" label="2x Drop Rate" id="powerDropYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerDropCoolYellow" text="0  " />
+                            <control width = "150px" name="button" label="2x Drop Rate" id="powerDropYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerDropCoolYellow" text="0  " />
                         </panel>
                         
                         <panel  width = "100%" childLayout = "absolute">
                             <panel x = "0px" y = "0px" id = "Yellow1panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="0.5x Conveyor Speed" id="powerSpecial1Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px"  name="label" id = "powerSpecial1CoolYellow" text="0  " />
+                                <control width = "150px" name="button" label="0.5x Conveyor Speed" id="powerSpecial1Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px"  name="label" id = "powerSpecial1CoolYellow" text="0  " />
                             </panel>
                             <panel x = "0px" y = "0px" id = "Yellow2panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="3.0x Drop Rate" id="powerSpecial2Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial2CoolYellow" text="0  " />
+                                <control width = "150px" name="button" label="3.0x Drop Rate" id="powerSpecial2Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial2CoolYellow" text="0  " />
                             </panel>
                             <panel x = "0px" y = "0px" id = "Yellow3panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="Drop Black GP" id="powerSpecial3Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial3CoolYellow" text="0  " />
+                                <control width = "150px" name="button" label="Drop Black GP" id="powerSpecial3Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial3CoolYellow" text="0  " />
                             </panel>
                             <panel x = "0px" y = "0px" id = "Yellow4panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="Wipe Conveyor" id="powerSpecial4Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial4CoolYellow" text="0  " />
+                                <control width = "150px" name="button" label="Wipe Conveyor" id="powerSpecial4Yellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial4CoolYellow" text="0  " />
                             </panel>
                         </panel>
                         
 
                         <panel childLayout="horizontal">
-                            <control width = "180%" name="button" label="Stop Conveyor" id="powerStop" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerStopCool" text="0  " />
+                            <control width = "185%" name="button" label="Stop Conveyor" id="powerStop" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerStopCool" text="0  " />
                         </panel>
                         
                         <panel id = "bonusYellowPanel" childLayout="horizontal">
-                            <control width = "140px" name="button" label="Flip Conveyor" id="powerBonusYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "bonusCoolYellow" text="0  " />
+                            <control width = "150px" name="button" label="Flip Conveyor" id="powerBonusYellow" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "bonusCoolYellow" text="0  " />
                         </panel>
 
                        
@@ -147,32 +178,32 @@
                         <control width = "100%" id="teamBLabel" name="label" text="0" />
                         
                         <panel childLayout="horizontal">
-                            <control width = "140px" name="button" label="2x Conveyor Speed" id="powerSpeedBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolBlue" text="0  " />
+                            <control width = "150px" name="button" label="2x Conveyor Speed" id="powerSpeedBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolBlue" text="0  " />
                         </panel>
                         <panel childLayout="horizontal">
-                            <control width = "140px" name="button" label="1.5x Conveyor Speed" id="powerSpeedBlue2" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolBlue2" text="0  " />
+                            <control width = "150px" name="button" label="1.5x Conveyor Speed" id="powerSpeedBlue2" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpeedCoolBlue2" text="0  " />
                         </panel>
                         <panel childLayout="horizontal">
-                            <control width = "140px" name="button" label="2x Drop Rate" id="powerDropBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerDropCoolBlue" text="0  " />
+                            <control width = "150px" name="button" label="2x Drop Rate" id="powerDropBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerDropCoolBlue" text="0  " />
                         </panel>
                         
                         <panel width = "100%" childLayout = "absolute">
                             <panel x = "0px" y = "0px" id = "Blue1panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="0.5x Conveyor Speed" id="powerSpecial1Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial1CoolBlue" text="0  " />
+                                <control width = "150px" name="button" label="0.5x Conveyor Speed" id="powerSpecial1Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial1CoolBlue" text="0  " />
                             </panel>
                             <panel x = "0px" y = "0px" id = "Blue2panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="3.0x Drop Rate" id="powerSpecial2Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial2CoolBlue" text="0  " />
+                                <control width = "150px" name="button" label="3.0x Drop Rate" id="powerSpecial2Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial2CoolBlue" text="0  " />
                             </panel>
                             <panel x = "0px" y = "0px" id = "Blue3panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="Drop Black GP" id="powerSpecial3Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial3CoolBlue" text="0  " />
+                                <control width = "150px" name="button" label="Drop Black GP" id="powerSpecial3Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial3CoolBlue" text="0  " />
                             </panel>
                             <panel x = "0px" y = "0px" id = "Blue4panel" childLayout="horizontal">
-                                <control width = "140px" name="button" label="Wipe Conveyor" id="powerSpecial4Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial4CoolBlue" text="0  " />
+                                <control width = "150px" name="button" label="Wipe Conveyor" id="powerSpecial4Blue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "powerSpecial4CoolBlue" text="0  " />
                             </panel>
                         </panel>
                         
                         <panel id = "bonusBluePanel" childLayout="horizontal">
-                            <control width = "140px" name="button" label="Flip Conveyor" id="powerBonusBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "bonusCoolBlue" text="0  " />
+                            <control width = "150px" name="button" label="Flip Conveyor" id="powerBonusBlue" align="center" valign="center"></control> <control margin = "0px, 0px, 0px, 10px" name="label" id = "bonusCoolBlue" text="0  " />
                         </panel>
                     </panel>
                    
@@ -186,7 +217,7 @@
  
                    
                 <!--Admin Panel--> 
-                <panel id = "admin-panel" style="nifty-panel" height="40%" width="100%" childLayout="vertical">
+                <panel id = "admin-panel" style="nifty-panel" height="42%" width="100%" childLayout="vertical">
                     <control name="label" text="ADMIN PANEL" />
                     
                     <!--Modify Power-->
@@ -211,29 +242,32 @@
                     </panel>
                     
                     <!--Drop Ball Buttion-->
-                    <control name="button" label="Drop Ball" id="dropBALL" align="center"
-                          valign="center" visibleToMouse="true" >
+                    <control name="button" label="Drop Ball" id="dropBALL" margin = "10, 0, 10, 0"  align="center" valign="center" visibleToMouse="true" >
                         <interact onClick="dropABall()"/>
                     </control>
 
                      <!--Drop Balls Checkbox-->
-                    <control name="label" text="Drop Balls?" />
-                    <control align="center" checked="true" id="ballDropCheck" name="checkbox" />
+                    <panel childLayout = "horizontal" align = "center">
+                        <control name="label" text="Drop Balls?"  padding="23px" align="center" />
+                        <control align="center" checked="true" id="ballDropCheck" name="checkbox"  />
+                    </panel>
 
                      <!--Traverse Time Slider-->
-                    <control name="label" text="Traversal Time (s)" />
+                    <control name="label" margin = "10, 0, 10, 0" text="Traversal Time (s)" />
                     <control min="1" max="45" initial="45" id="ttimeSlider" name="horizontalSlider" width="100%" />
 
                      <!--Drop Delay Field--> 
-                    <control name="label" text="Drop ball every" />
-                    <control name="textfield" id="dropDelayField" maxLength="10" text="5" />
-                    <control name="label" text="seconds" />
-                    <control name="button" label="Go">
-                        <interact onClick="dropDelayChange()"/>
-                    </control>
+                    <panel childLayout = "horizontal" margin = "10, 0, 10, 0" align = "center">
+                        <control name="label" text="Drop ball every" />
+                        <control margin = "0, 10, 0, 10" name="textfield" id="dropDelayField" width = "30px" maxLength="3" text="5" />
+                        <control name="label" text="seconds" />
+                        <control name="button" label="Go"  margin = "0, 0, 0, 10">
+                            <interact onClick="dropDelayChange()"/>
+                        </control>
+                    </panel>
                     
                     <!--Reset Game Button--> 
-                    <control name="button" label="Reset Game">
+                    <control name="button" label="Reset Game" align = "center">
                         <interact onClick="resetButton()"/>
                     </control>
                     
