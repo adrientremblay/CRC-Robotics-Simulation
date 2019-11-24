@@ -9,7 +9,11 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.DropDown;
+import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
+import static guiControllers.ConveyorScreen.getElementByID;
+import static guiControllers.ConveyorScreen.setTextToElement;
 import java.util.ArrayList;
 import testerPackage.Main;
 import static testerPackage.Main.nifty;
@@ -61,9 +65,6 @@ public class StartScreen extends BaseAppState implements de.lessvoid.nifty.scree
         dropDownY = screen.findNiftyControl("yellowDropdown",DropDown.class);
         dropDownB.addAllItems(items);
         dropDownY.addAllItems(items);
-        
-//        BitmapText t;
-//        this.screen.findElementById("titletext").getClass());
     }
 
     @Override
@@ -91,4 +92,37 @@ public class StartScreen extends BaseAppState implements de.lessvoid.nifty.scree
 //        getElementByID("directionLabel").getRenderer(TextRenderer.class).setText("YELLOW");
     }
     
+     /**
+     * Set text of the element e to the string text
+     * @param e the element
+     * @param text the text
+     */
+    public static void setTextToElement(Element e, String text) {
+    	e.getRenderer(TextRenderer.class).setText(text);
+    }
+    
+    /**
+     * Finds and returns element of the given id.
+     * @param elementID the id of the element to find
+     * @return the element
+     */
+    public static Element getElementByID(String elementID) {
+        try {
+            return (Element) nifty.getScreen("start").findElementById(elementID);
+        } catch (Exception e) {
+            System.err.println("Failed to find a nifty element called " + elementID +" !");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /**
+     * Set text of an element indicated by id to the String text.
+     * 
+     * @param id the id of the element
+     * @param text the string to set
+     */
+    public static void setTextToID(String id, String text) {
+        setTextToElement(getElementByID(id), text);
+    }
 }

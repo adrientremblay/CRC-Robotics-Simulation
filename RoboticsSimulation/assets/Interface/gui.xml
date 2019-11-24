@@ -5,38 +5,60 @@
     
     <!--Start Screen-->=
     <screen id = "start" controller="guiControllers.StartScreen">
-        <layer id="foreground" childLayout="vertical">
-            <panel id="panel_top" height="25%" width="65%" align="center" childLayout="center">
-                <text id = "titletext" text="CRC Robotics Simulation 2019" font="Interface/Fonts/Chiller.fnt" width="100%" height="100%"/>
+        <layer id="foreground" childLayout="horizontal">
+            <!-- Top Left Panel -->
+            <panel padding = "10px, 10px, 10px, 10px" id="panel_top_left" height="100%" width="25%" childLayout="vertical" >
+                <panel id="inner_pannel" height="50%" width="25%" childLayout="vertical">
+                    <!--Game Time-->
+                    <panel childLayout="horizontal">
+                        <control name="label" text="Time Left In Game: " /><control id="gameTimeLabel" name="label" text="0       " />
+                    </panel>
+                </panel>
+                
+            </panel>
+            
+            <panel id="panel_top" height="100%" width="75%" align="right" childLayout="vertical">
+                <!--<text id = "titletext" text="CRC Robotics Simulation 2019" width="100%" height="50%"/>-->
+                
+                 <panel id="panel_bottom" width="30%" align="right" childLayout="horizontal">
+                     <!--Drag Menu-->
+                    <panel id="panel_top_right" childLayout="horizontal" height = "50%">
+                            <panel width = "50%" childLayout = "vertical"> 
+                                <control name="button" label="YELLOW start" id="yStart" align="center"
+                                      valign="center" visibleToMouse="true" >
+                                    <interact onClick="yellowStart()"/>
+                                    <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                                </control>
+
+                                <control displayItems = "4" id="yellowDropdown" name="dropDown" />
+                            </panel>
+
+                            <panel width = "50%" childLayout = "vertical"> 
+                                <control name="button" label="BLUE start" id="bStart" align="center"
+                                      valign="center" visibleToMouse="true" >
+                                    <interact onClick="blueStart()"/>
+                                    <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
+                                </control>
+
+                                <control displayItems = "4" id="blueDropdown" name="dropDown" />
+                            </panel>
+                     </panel>
+               </panel>
+               
+               <!--<image filename="Interface/keys.jpg"></image>-->
+               
+               
             </panel>
 <!--            <panel id="panel_mid" height="20%" width="65%" align="center" childLayout="center" >}{
                 <text text="Select special powers for each team and click the start button to have that team set off the drag button&#10;Drag on the screen to change the viewing angle&#10;Use W,S,A,D to move around"
                       font="Interface/Fonts/Default.fnt" width="100%" height="100%"/>
             </panel>-->
-            <panel id="panel_bottom" width="30%" align="center" childLayout="horizontal">
-                <!--Drag Menu-->
-                <panel id="panel_top_right" childLayout="horizontal">
-                   <panel width = "50%" childLayout = "vertical"> 
-                       <control name="button" label="YELLOW start" id="yStart" align="center"
-                             valign="center" visibleToMouse="true" >
-                           <interact onClick="yellowStart()"/>
-                           <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
-                       </control>
-
-                       <control displayItems = "4" id="yellowDropdown" name="dropDown" />
-                   </panel>
-
-                   <panel width = "50%" childLayout = "vertical"> 
-                       <control name="button" label="BLUE start" id="bStart" align="center"
-                             valign="center" visibleToMouse="true" >
-                           <interact onClick="blueStart()"/>
-                           <effect><onClick name="hide" targetElement="yStart" /><onClick name="hide" targetElement="bStart" /></effect>
-                       </control>
-
-                       <control displayItems = "4" id="blueDropdown" name="dropDown" />
-                   </panel>
-                </panel>
-            </panel>
+           
+        </layer>
+        
+        <layer id="background" childLayout="center">
+            <image filename="Interface/keys.jpg">
+            </image>
         </layer>
         
 <!--        

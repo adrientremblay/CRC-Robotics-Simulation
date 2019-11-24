@@ -121,6 +121,8 @@ public class ConveyorScreen extends BaseAppState implements de.lessvoid.nifty.sc
             //Specials
         halfBlue = new SpeedBoost(20, Main.BASE_POWERUP_COOLDOWN, "powerSpecial1CoolBlue", screen.findNiftyControl("powerSpecial1Blue", Button.class),0, 0.5f);
         halfYellow = new SpeedBoost(20, Main.BASE_POWERUP_COOLDOWN, "powerSpecial1CoolYellow", screen.findNiftyControl("powerSpecial1Yellow", Button.class),0, 0.5f);
+        halfBlue.setCooldown(50);
+        halfYellow.setCooldown(50);
 
         halfDropBlue = new DropBoost(20, Main.BASE_POWERUP_COOLDOWN, "powerSpecial2CoolBlue", screen.findNiftyControl("powerSpecial2Blue", Button.class),1, 3.0f);
         halfDropYellow = new DropBoost(20, Main.BASE_POWERUP_COOLDOWN, "powerSpecial2CoolYellow", screen.findNiftyControl("powerSpecial2Yellow", Button.class),1, 3.0f);

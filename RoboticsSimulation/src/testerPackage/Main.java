@@ -31,6 +31,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import gameThings.Ball;
 import gameThings.Powerup;
+import guiControllers.StartScreen;
 import java.util.ArrayList;
 
 /**
@@ -45,7 +46,7 @@ public class Main extends SimpleApplication {
     
     // SIMULATION OPTIONS
     private final static boolean DEBUG = false;
-    public static final boolean ADMIN_MENU = true;
+    public static final boolean ADMIN_MENU = false;
     public static final boolean CONSOLE_MENU = false;
     
     // SIMULATION CONSTANTS
@@ -53,7 +54,7 @@ public class Main extends SimpleApplication {
     public final static int BALL_VALUE_STD = 5; // points of a reglar ball
     public final static int BALL_VALUE_BLK = 50; // points of a black ball
     private final static int BASE_DIR_CHANGE_TIME = 30; // DC THIS!!
-    public static int BASE_DROP_TIME = 5;
+    public static int BASE_DROP_TIME = 4;
     private final static Vector3f CAMERA_POS_INITIAL = new Vector3f(6f, 6f, 6f);
     private final static Vector3f LOOK_POS_INITIAL = new Vector3f(3f, 3.5f, 2f);
     private final static Vector3f BALL_DROP_POS =  new Vector3f(0, 5.0f, 0);
@@ -70,7 +71,7 @@ public class Main extends SimpleApplication {
     public float timeSinceDirChange; // time since conveyor direction changes
     public float dropInterval = 0; // time between red bean bag drops
     public boolean dropBalls = true; // if true, drop RED balls onto conveyor
-    public static float ttime = 45; // speed to go all the way across the conveyor
+    public static float ttime = 40; // speed to go all the way across the conveyor
     public static int conveyorDirection = 0; // +1 -> right , -1 -> left, 0 -> stopped
     public static float conveyorSpeed = 0; // speed of conveyor
     public static boolean started = false; // false -> not started, true -> game started
@@ -351,16 +352,16 @@ public class Main extends SimpleApplication {
                 } else if (name.equals("5") && ConveyorScreen.getElementByID("bonusYellowPanel").isVisible()) {
                     ConveyorScreen.getElementByID("bonusYellowPanel").hide();
                     ConveyorScreen.bonusYellow.activate();
-                } else if (name.equals("6") && ConveyorScreen.getElementByID("bonusBluePanel").isVisible()) {
+                } else if (name.equals("0") && ConveyorScreen.getElementByID("bonusBluePanel").isVisible()) {
                     ConveyorScreen.getElementByID("bonusBluePanel").hide();
                     ConveyorScreen.bonusBlue.activate();
-                } else if (name.equals("7")) {
+                } else if (name.equals("6")) {
                     ConveyorScreen.speedBlue.activate();
-                } else if (name.equals("8")) {
+                } else if (name.equals("7")) {
                     ConveyorScreen.speedBlue2.activate();
-                } else if (name.equals("9")) {
+                } else if (name.equals("8")) {
                     ConveyorScreen.dropBlue.activate();
-                } else if (name.equals("0") && ConveyorScreen.blueSpecialPowerup != null) {
+                } else if (name.equals("9") && ConveyorScreen.blueSpecialPowerup != null) {
                     ConveyorScreen.blueSpecialPowerup.activate();
                 } else if (name.equals("G")) {
                     ConveyorScreen.stopPower.activate();
@@ -446,28 +447,30 @@ public class Main extends SimpleApplication {
             //Updating Points
             ConveyorScreen.setTextToID("teamALabel", String.valueOf(yellowScore));
             ConveyorScreen.setTextToID("teamBLabel", String.valueOf(blueScore));
-            //Updating cooldownspeeds for Powerups
-            sCounter +=tpf;
-            if (sCounter > 1 ) { // Run each second
-                //Updating Game Timer
-                timeLeft--;
-                //Checking if time is out... XXX
-                if (timeLeft == 0) {
-                    endGame();
-                }
+        }
+        //Updating cooldownspeeds for Powerups
+        sCounter +=tpf;
+        if (sCounter > 1 ) { // Run each second
+            //Updating Game Timer
+            timeLeft--;
+            //Checking if time is out... XXX
+            if (timeLeft == 0) {
+                endGame();
+            }
+             //Updating time left display
+            int minutes = timeLeft / 60;
+            int seconds = (timeLeft) % 60;
+            String displayTL = String.format("%d:%02d", minutes, seconds);
+            
+             if (started){
                 //Checking if one minute left for bonus powerup
                 if (timeLeft == BASE_GAME_TIME  - 60) {
                     ConveyorScreen.console.output("ONE MINUTE PASSED!  ONE TIME CONVEYOR SWITCH POWERUP ENABLED!");
                     ConveyorScreen.getElementByID("bonusYellowPanel").show();
                     ConveyorScreen.getElementByID("bonusBluePanel").show();
                 }
-                
-                //Updating time left display
-                int minutes = timeLeft / 60;
-                int seconds = (timeLeft) % 60;
-                String displayTL = String.format("%d:%02d", minutes, seconds);
-                ConveyorScreen.setTextToID("gameTimeLabel", displayTL);
-                
+
+
                 //active powerup logic
                 ArrayList<Powerup> remove = new ArrayList<>();
                 for (Powerup p : activePowerups){
@@ -483,9 +486,11 @@ public class Main extends SimpleApplication {
                     }
                 }
                 activePowerups.removeAll(remove);
-                sCounter = 0.0f;
-            }
-
+                ConveyorScreen.setTextToID("gameTimeLabel", displayTL);
+             } else {
+                StartScreen.setTextToID("gameTimeLabel", displayTL);
+             }
+             sCounter = 0.0f;
         }
         
         // Ball Deletion

@@ -8,7 +8,6 @@ package guiControllers;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.TextField;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
@@ -52,7 +51,6 @@ public class EndScreen extends BaseAppState implements de.lessvoid.nifty.screen.
     public void onStartScreen() {
         Element txt = screen.findElementById("endmsg");
         Main.started = false;
-        System.out.println(Main.app.blueScore);
         txt.getRenderer(TextRenderer.class).setText("Blue Team Score: " + String.valueOf(Main.app.blueScore) + " Yellow Team Score: " + String.valueOf(Main.app.yellowScore));
     }
 
